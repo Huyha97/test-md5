@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+
+
+<div class="container" id="formCreateBook" >
+  <div >
+    <form class="box" [formGroup]="formBook" (ngSubmit)="createBook()" >
+      <table id = "firsttable" class="table table-striped ">
+        <tr>
+          <th  id="head"><h1 >{{ titleBook }}</h1></th>
+        </tr>
+        <tr>
+          <th><label for="title" class="form-label">Title:</label></th>
+          <td><input class="form-control" id="title" formControlName="title" type="text"></td>
+        </tr>
+        <tr>
+          <th><label for="author" class="form-label">author:</label></th>
+          <td><input class="form-control" id="author"  formControlName="author" type="text"></td>
+        </tr>
+        <tr>
+          <th><label for="description" class="form-label">description:</label></th>
+          <td><input class="form-control" id="description" formControlName="description" type="text"></td>
+        </tr>
+            <button type="submit" class="btn btn-primary">{{ btnSubmit }}</button>
+      </table>
+    </form>
+  </div>
+  <br>
+  <h1 (click)="getAllBook()">List Books</h1>
+  <div style="float: right" >
+    <button type="button" class="btn btn-outline-danger">total: <input id="totalBook" type="text" readonly="readonly" value="{{total}}"> books</button>
+  </div>
+  <br><br>
+  <table style="border: 1px solid darkred " class="table table-hover table-light table-sm  ">
+    <thead>
+    <tr class="table-active">
+      <th>Id</th>
+      <th>Title</th>
+      <th>author</th>
+      <th>description</th>
+      <th>Delete</th>
+      <th>Edit</th>
+      <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of books,let i = index"  class="table-active">
+      <td >
+        {{c.id}}
+      </td>
+      <td (click)="getBook(c.id)">
+        {{c.title}}
+      </td>
+      <td>{{c.author}}</td>
+      <td>{{c.description}}</td>
+      <td (click)="deleteBook(c.id, c.title)"><button type="button" class="btn btn-danger">Delete</button></td>
+      <td (click)="Edit(c.id)"><button type="button" class="btn btn-warning">Edit</button></td>
+      <td (click)="getBook(c.id)"><button type="button" class="btn btn-info">Info</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</body>
+</html>
